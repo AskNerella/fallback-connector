@@ -2,38 +2,37 @@ package org.mule.extension.fallback.internal.operation;
 
 import static org.mule.runtime.extension.api.annotation.param.MediaType.ANY;
 
-import org.mule.extension.fallback.internal.FallbackConfiguration;
-import org.mule.extension.fallback.internal.connection.FallbackConnection;
+import org.mule.extension.fallback.internal.configuration.FallbackConfiguration;
+import org.mule.extension.fallback.internal.routes.FallbackFlow;
+import org.mule.extension.fallback.internal.routes.MainFlow;
 import org.mule.runtime.extension.api.annotation.param.MediaType;
+import org.mule.runtime.extension.api.annotation.param.Optional;
+import org.mule.runtime.extension.api.annotation.param.display.DisplayName;
+import org.mule.runtime.extension.api.runtime.parameter.ParameterResolver;
+import org.mule.runtime.extension.api.runtime.process.RouterCompletionCallback;
 import org.mule.runtime.extension.api.annotation.param.Config;
 import org.mule.runtime.extension.api.annotation.param.Connection;
 
-
 /**
- * This class is a container for operations, every public method in this class will be taken as an extension operation.
+ * This class is a container for operations, every public method in this class
+ * will be taken as an extension operation.
  */
 public class FallbackOperations {
 
-  /**
-   * Example of an operation that uses the configuration and a connection instance to perform some action.
-   */
-  @MediaType(value = ANY, strict = false)
-  public String retrieveInfo(@Config FallbackConfiguration configuration, @Connection FallbackConnection connection){
-    return "Using Configuration [" + configuration.getConfigId() + "] with Connection id [" + connection.getId() + "]";
-  }
+	@DisplayName("Execute with Fallback")
+	@MediaType(value = ANY, strict = false)
+	public void executeWithFallback(
+			@Optional(defaultValue = "60000") @DisplayName("Retry Connection (ms)") Integer retryConnection,
+			
+			@Optional(defaultValue = "#[output application/java --- not isEmpty(error)]") @DisplayName("Trip Condition") ParameterResolver<Object> tripCondition,
 
-  /**
-   * Example of a simple operation that receives a string parameter and returns a new string message that will be set on the payload.
-   */
-  @MediaType(value = ANY, strict = false)
-  public String sayHi(String person) {
-    return buildHelloMessage(person);
-  }
+			@DisplayName("Main Flow") MainFlow flow,
 
-  /**
-   * Private Methods are not exposed as operations
-   */
-  private String buildHelloMessage(String person) {
-    return "Hello " + person + "!!!";
-  }
+			@DisplayName("Fallback Flow") FallbackFlow fallbackFlow,
+
+			RouterCompletionCallback callback) {
+		// Operation implementation goes here
+		
+		
+	}
 }
