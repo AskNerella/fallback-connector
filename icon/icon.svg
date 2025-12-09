@@ -1,0 +1,32 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- MuleSoft-style Yellow Background -->
+  <circle cx="128" cy="128" r="128" fill="#F7C700"/>
+
+  <!-- Icon group -->
+  <g fill="#FFFFFF">
+
+    <!-- Top-left square -->
+    <rect x="64" y="48" width="56" height="56" rx="12"/>
+
+    <!-- Top-right square -->
+    <rect x="136" y="48" width="56" height="56" rx="12"/>
+
+    <!-- Bottom-right square -->
+    <rect x="136" y="128" width="56" height="56" rx="12"/>
+
+    <!-- Fallback arrow (L-shaped) -->
+    <path d="
+      M120 128
+      H80
+      V160
+      H108
+      L88 180
+      L68 160
+      H96
+      V128
+    " />
+
+  </g>
+
+</svg>
