@@ -1,0 +1,19 @@
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:fallback="http://www.mulesoft.org/schema/mule/fallback"
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+          http://www.mulesoft.org/schema/mule/fallback http://www.mulesoft.org/schema/mule/fallback/current/mule-fallback.xsd">
+
+    <fallback:config name="config" configId="configId">
+        <fallback:connection requiredParameter="aValue" />
+    </fallback:config>
+
+    <flow name="sayHiFlow">
+        <fallback:say-hi person="Mariano Gonzalez"/>
+    </flow>
+
+    <flow name="retrieveInfoFlow">
+        <fallback:retrieve-info config-ref="config"/>
+    </flow>
+
+</mule>
